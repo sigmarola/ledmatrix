@@ -38,9 +38,9 @@ uint8_t colors[][3] = { // Sand grain colors, 8 groups...
 	  0, 77,255,   // Blue
 	117,  7,135 }; // Purple
 
-#define BG_RED    0 // Background color (r,g,b)
-#define BG_GREEN 20
-#define BG_BLUE  80
+#define BG_RED   20 //0 Background color (r,g,b) 
+#define BG_GREEN 20 //20
+#define BG_BLUE  20 //80
 
 // Signal handler allows matrix to be properly deinitialized.
 int sig[] = { SIGHUP,SIGINT,SIGQUIT,SIGABRT,SIGKILL,SIGBUS,SIGSEGV,SIGTERM };
