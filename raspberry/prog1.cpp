@@ -14,19 +14,19 @@
 
 #ifndef ARDUINO // Arduino IDE sometimes aggressively builds subfolders
 
-//#include "Adafruit_PixelDust.h"
+#include "Adafruit_PixelDust.h"
 #include "led-matrix-c.h"
 #include "lis3dh.h"
 #include <signal.h>
 
 #include "logo.h" // This contains the obstacle bitmaps
 
-//#define N_GRAINS (8*8*8) ///< Number of grains of sand on 64x64 matrix
+#define N_GRAINS (8*8*8) ///< Number of grains of sand on 64x64 matrix
 
 struct RGBLedMatrix *matrix = NULL;
 Adafruit_LIS3DH      lis3dh;
 volatile bool        running = true;
-//int                  nGrains = N_GRAINS; // Runtime grain count (adapts to res)
+int                  nGrains = N_GRAINS; // Runtime grain count (adapts to res)
 
 /*uint8_t colors[][3] = { // Sand grain colors, 8 groups...
 	  0,  0,  0,   // Black
@@ -96,9 +96,9 @@ int main(int argc, char **argv) {
 	}*/
 
 	// Set up the logo bitmap obstacle in the PixelDust playfield
-	/*int x1 = (width  - LOGO_WIDTH ) / 2;
+	int x1 = (width  - LOGO_WIDTH ) / 2;
 	int y1 = (height - LOGO_HEIGHT) / 2;
-	for(y=0; y<LOGO_HEIGHT; y++) {
+	/*for(y=0; y<LOGO_HEIGHT; y++) {
 		for(x=0; x<LOGO_WIDTH; x++) {
 			uint8_t c = logo_mask[y][x / 8];
 			if(c & (0x80 >> (x & 7))) {
