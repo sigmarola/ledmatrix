@@ -28,7 +28,7 @@ Adafruit_LIS3DH      lis3dh;
 volatile bool        running = true;
 int                  nGrains = N_GRAINS; // Runtime grain count (adapts to res)
 
-uint8_t colors[][3] = { // Sand grain colors, 8 groups...
+/*uint8_t colors[][3] = { // Sand grain colors, 8 groups...
 	  0,  0,  0,   // Black
 	120, 79, 23,   // Brown
 	228,  3,  3,   // Red
@@ -36,11 +36,11 @@ uint8_t colors[][3] = { // Sand grain colors, 8 groups...
 	255,237,  0,   // Yellow
 	  0,128, 38,   // Green
 	  0, 77,255,   // Blue
-	117,  7,135 }; // Purple
+	117,  7,135 }; // Purple*/
 
-#define BG_RED   20 //0 Background color (r,g,b) 
-#define BG_GREEN 20 //20
-#define BG_BLUE  20 //80
+#define BG_RED   0 // Background color (r,g,b) 
+#define BG_GREEN 20 
+#define BG_BLUE  80 
 
 // Signal handler allows matrix to be properly deinitialized.
 int sig[] = { SIGHUP,SIGINT,SIGQUIT,SIGABRT,SIGKILL,SIGBUS,SIGSEGV,SIGTERM };
@@ -59,7 +59,7 @@ int main(int argc, char **argv) {
 	struct RGBLedMatrixOptions options;
 	struct LedCanvas          *canvas;
 	int                        width, height, i, xx, yy, zz;
-	Adafruit_PixelDust        *sand = NULL;
+	//Adafruit_PixelDust        *sand = NULL;
 	dimension_t                x, y;
 
 	for(i=0; i<N_SIGNALS; i++) signal(sig[i], irqHandler); // ASAP!
@@ -89,11 +89,11 @@ int main(int argc, char **argv) {
 	// is set 'false' so the grains are not sorted each frame.
 	// This is because the grains have specific colors by index
 	// (sorting would mess that up).
-	sand = new Adafruit_PixelDust(width, height, nGrains, 1, 64, false);
+	/*sand = new Adafruit_PixelDust(width, height, nGrains, 1, 64, false);
 	if(!sand->begin()) {
 		puts("PixelDust init failed");
 		return 3;
-	}
+	}*/
 
 	// Set up the logo bitmap obstacle in the PixelDust playfield
 	int x1 = (width  - LOGO_WIDTH ) / 2;
@@ -107,8 +107,8 @@ int main(int argc, char **argv) {
 		}
 	}
 
-	// Set up initial sand coordinates, in 8x8 blocks <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-	int n = 0;
+	// Set up initial sand coordinates, in 8x8 blocks
+/*	int n = 0;
 	for(i=0; i<8; i++) {
 		xx = i * width / 8;
 		yy =  height * 7 / 8;
@@ -117,7 +117,7 @@ int main(int argc, char **argv) {
 				sand->setPosition(n++, xx + x, yy + y);
 			}
 		}
-	}
+	}*/
 
 	while(running) {
 		// Read accelerometer...
@@ -126,7 +126,8 @@ int main(int argc, char **argv) {
 		// Run one frame of the simulation.  Axis flip here
 		// depends how the accelerometer is mounted relative
 		// to the LED matrix.
-		sand->iterate(-xx, -yy, zz);
+
+		//sand->iterate(-xx, -yy, zz);
 
 		// led_canvas_fill() doesn't appear to work properly
 		// with the --led-rgb-sequence option...so clear the
@@ -150,12 +151,12 @@ int main(int argc, char **argv) {
 		}
 
 		// Draw new sand atop canvas
-		for(i=0; i<nGrains; i++) {
+		/*for(i=0; i<nGrains; i++) {
 			sand->getPosition(i, &x, &y);
 			int n = i / 64; // Color index
 			led_canvas_set_pixel(canvas,
 			  x, y, colors[n][0], colors[n][1], colors[n][2]);
-		}
+		}*/
 
 		// Update matrix contents on next vertical sync
 		// and provide a new canvas for the next frame.
