@@ -101,9 +101,9 @@ int main(int argc, char **argv) {
 	for(y=0; y<LOGO_HEIGHT; y++) {
 		for(x=0; x<LOGO_WIDTH; x++) {
 			uint8_t c = logo_mask[y][x / 8];
-			if(c & (0x80 >> (x & 7))) {
+			/*if(c & (0x80 >> (x & 7))) {
 			  sand->setPixel(x1+x, y1+y);
-			}
+			}*/
 		}
 	}
 
