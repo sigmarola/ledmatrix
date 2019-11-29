@@ -108,7 +108,7 @@ int main(int argc, char **argv) {
 	}
 
 	// Set up initial sand coordinates, in 8x8 blocks <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-	/*int n = 0;
+	int n = 0;
 	for(i=0; i<8; i++) {
 		xx = i * width / 8;
 		yy =  height * 7 / 8;
@@ -117,7 +117,7 @@ int main(int argc, char **argv) {
 				sand->setPosition(n++, xx + x, yy + y);
 			}
 		}
-	}*/
+	}
 
 	while(running) {
 		// Read accelerometer...
