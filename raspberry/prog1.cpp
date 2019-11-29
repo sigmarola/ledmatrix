@@ -59,6 +59,7 @@ int main(int argc, char **argv) {
 	struct RGBLedMatrixOptions options;
 	struct LedCanvas          *canvas;
 	int                        width, height, i, xx, yy, zz;
+	*int tmpval;
 	//Adafruit_PixelDust        *sand = NULL;
 	dimension_t                x, y;
 
@@ -128,7 +129,7 @@ int main(int argc, char **argv) {
 		// to the LED matrix.
 
 		//sand->iterate(-xx, -yy, zz);
-		LOGO_HEIGHT=LOGO_HEIGHT+&xx;
+		*LOGO_HEIGHT+=&xx;
 		// led_canvas_fill() doesn't appear to work properly
 		// with the --led-rgb-sequence option...so clear the
 		// background manually with a bunch of set_pixel() calls...
