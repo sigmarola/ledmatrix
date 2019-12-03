@@ -27,6 +27,9 @@ struct RGBLedMatrix *matrix = NULL;
 Adafruit_LIS3DH      lis3dh;
 volatile bool        running = true;
 int                  nGrains = N_GRAINS; // Runtime grain count (adapts to res)
+int tmp = 0;
+int xt, yt;
+int spx, spy;
 
 /*uint8_t colors[][3] = { // Sand grain colors, 8 groups...
 	  0,  0,  0,   // Black
@@ -123,13 +126,22 @@ int main(int argc, char **argv) {
 	while(running) {
 		// Read accelerometer...
 		lis3dh.accelRead(&xx, &yy, &zz);
-
+		xt=xx/1000;
+		yt=yy/1000;
+		spx = xt > 64 ? 0 : 1;
+		spx = xt < 0 ? 0 : 1;
+		if((xt)>32){x1+=spx}
+		else if((xt)<32){x1-=spx}
+		spy = yt > 64 ? 0 : 1;
+		spy = yt < 0 ? 0 : 1;
+		if((yt)>32){y1+=1}
+		else if((yt)<32){y1-=1}
 		// Run one frame of the simulation.  Axis flip here
 		// depends how the accelerometer is mounted relative
 		// to the LED matrix.
 
 		//sand->iterate(-xx, -yy, zz);
-		*LOGO_HEIGHT+=&xx;
+		//*LOGO_HEIGHT+=&xx;
 		// led_canvas_fill() doesn't appear to work properly
 		// with the --led-rgb-sequence option...so clear the
 		// background manually with a bunch of set_pixel() calls...

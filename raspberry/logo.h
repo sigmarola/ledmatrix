@@ -11,6 +11,7 @@
 
 #define LOGO_WIDTH  40
 #define LOGO_HEIGHT 40
+int static tmp = 0;
 
 const uint8_t logo_gray[LOGO_HEIGHT][LOGO_WIDTH] = {
   0X00, 0X00, 0X00, 0X00, 0X00, 0X00, 0X00, 0X00, 0X00, 0X00, 0X00, 0X00,
