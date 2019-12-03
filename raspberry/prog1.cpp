@@ -18,9 +18,10 @@
 #include "led-matrix-c.h"
 #include "lis3dh.h"
 #include <signal.h>
-
+#include <iostream>
 #include "logo.h" // This contains the obstacle bitmaps
 
+using namespace std;
 #define N_GRAINS (8*8*8) ///< Number of grains of sand on 64x64 matrix
 
 struct RGBLedMatrix *matrix = NULL;
@@ -144,21 +145,24 @@ int main(int argc, char **argv) {
 		}*/
 		spx = xt > 32 ? 1 : -1;
 		spy = yt > 32 ? 1 : -1;
-		if(spx=1||spy=1){
+		/*if(spx=1||spy=1){
 			if(xt>yt){spx=1;spy=0;}
 			else {spx=0; spy=1;}
 		}
 		if(spx=-1||spy=-1){
 			if(xt<yt){spx=1;spy=0;}
 			else {spx=0; spy=1;}
-		}
+		}*/
 		x1+=spx;
 		y1+=spy;
 		/*if((yt)>32){y1+=spy;}
 		else if((yt)<32){y1-=spy;}
 		if((xt)>32){x1+=spx;}
 		else if((xt)<32){x1-=spx;}*/
-		
+		if(x1>32)x1=32;
+		if(x1<0)x1=0;
+		if(y1>32)y1=32;
+		if(y1<0)y1=0;
 		
 		// Run one frame of the simulation.  Axis flip here
 		// depends how the accelerometer is mounted relative
