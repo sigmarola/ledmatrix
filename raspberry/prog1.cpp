@@ -133,21 +133,21 @@ int main(int argc, char **argv) {
 
 		spy = yt > 64 ? 0 : 1;
 		spy = yt < 0 ? 0 : 1;*/
-		
+		if((yt)>32){y1+=spy;}
+		else if((yt)<32){y1-=spy;}
 		if(xt>32||yt>32){
-			if(xt>yt){spx=1;spy=0}
+			if(xt>yt){spx=1;spy=0;}
 			else {spx=0; spy=1;}
 		}
 		if(xt<32||yt<32){
-			if(xt<yt){spx=1;spy=0}
+			if(xt<yt){spx=1;spy=0;}
 			else {spx=0; spy=1;}
 		}
 
 		if((xt)>32){x1+=spx;}
 		else if((xt)<32){x1-=spx;}
 		
-		if((yt)>32){y1+=spy;}
-		else if((yt)<32){y1-=spy;}
+		
 		// Run one frame of the simulation.  Axis flip here
 		// depends how the accelerometer is mounted relative
 		// to the LED matrix.
