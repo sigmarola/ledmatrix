@@ -72,6 +72,8 @@ int main(int argc, char **argv) {
 	options.cols = 64;
 	options.chain_length = 1;
 
+	spx = 1;
+	spy = 1;
 	// Parse command line input.  --led-help lists options!
 	matrix = led_matrix_create_from_options(&options, &argc, &argv);
 	if(matrix == NULL) return 1;
@@ -126,17 +128,26 @@ int main(int argc, char **argv) {
 		lis3dh.accelRead(&xx, &yy, &zz);
 		xt=xx/1000;
 		yt=yy/1000;
-		spx = xt > 64 ? 0 : 1;
+		/*spx = xt > 64 ? 0 : 1;
 		spx = xt < 0 ? 0 : 1;
 
 		spy = yt > 64 ? 0 : 1;
-		spy = yt < 0 ? 0 : 1;
-
-		if((xt)>32){x1+=spx; spy=0;}
-		else if((xt)<32){x1-=spx; spy=0;}
+		spy = yt < 0 ? 0 : 1;*/
 		
-		if((yt)>32){y1+=spy; spx=0;}
-		else if((yt)<32){y1-=spy; spx=0;}
+		if(xt>32||yt>32){
+			if(xt>yt){spx=1;spy=0}
+			else {spx=0; spy=1;}
+		}
+		if(xt<32||yt<32){
+			if(xt<yt){spx=1;spy=0}
+			else {spx=0; spy=1;}
+		}
+
+		if((xt)>32){x1+=spx;}
+		else if((xt)<32){x1-=spx;}
+		
+		if((yt)>32){y1+=spy;}
+		else if((yt)<32){y1-=spy;}
 		// Run one frame of the simulation.  Axis flip here
 		// depends how the accelerometer is mounted relative
 		// to the LED matrix.
