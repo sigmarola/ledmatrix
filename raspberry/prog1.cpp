@@ -27,7 +27,6 @@ struct RGBLedMatrix *matrix = NULL;
 Adafruit_LIS3DH      lis3dh;
 volatile bool        running = true;
 int                  nGrains = N_GRAINS; // Runtime grain count (adapts to res)
-int tmp = 0;
 int xt, yt;
 int spx, spy;
 
@@ -62,7 +61,6 @@ int main(int argc, char **argv) {
 	struct RGBLedMatrixOptions options;
 	struct LedCanvas          *canvas;
 	int                        width, height, i, xx, yy, zz;
-	*int tmpval;
 	//Adafruit_PixelDust        *sand = NULL;
 	dimension_t                x, y;
 
