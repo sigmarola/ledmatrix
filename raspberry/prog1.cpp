@@ -133,19 +133,31 @@ int main(int argc, char **argv) {
 
 		spy = yt > 64 ? 0 : 1;
 		spy = yt < 0 ? 0 : 1;*/
-		if((yt)>32){y1+=spy;}
-		else if((yt)<32){y1-=spy;}
-		if(xt>32||yt>32){
+		
+		/*if(xt>32||yt>32){
 			if(xt>yt){spx=1;spy=0;}
 			else {spx=0; spy=1;}
 		}
 		if(xt<32||yt<32){
 			if(xt<yt){spx=1;spy=0;}
 			else {spx=0; spy=1;}
+		}*/
+		spx = xt > 32 ? 1 : -1;
+		spy = yt > 32 ? 1 : -1;
+		if(spx=1||spy=1){
+			if(xt>yt){spx=1;spy=0;}
+			else {spx=0; spy=1;}
 		}
-
+		if(spx=-1||spy=-1){
+			if(xt<yt){spx=1;spy=0;}
+			else {spx=0; spy=1;}
+		}
+		x1+=spx;
+		y1+=spy;
+		/*if((yt)>32){y1+=spy;}
+		else if((yt)<32){y1-=spy;}
 		if((xt)>32){x1+=spx;}
-		else if((xt)<32){x1-=spx;}
+		else if((xt)<32){x1-=spx;}*/
 		
 		
 		// Run one frame of the simulation.  Axis flip here
